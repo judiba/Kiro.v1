@@ -25,28 +25,17 @@ function ProtectedApp() {
     if (stored !== null) return stored === 'true';
     return window.matchMedia('(prefers-color-scheme: dark)').matches;
   });
-
   const [showFormModal, setShowFormModal] = useState(false);
   const [editingTask, setEditingTask] = useState<Task | null>(null);
   const [selectedTask, setSelectedTask] = useState<Task | null>(null);
   const [deleteConfirm, setDeleteConfirm] = useState<{
     show: boolean;
     taskId: number | null;
-  }>({
-    show: false,
-    taskId: null,
-  });
+  }>({ show: false, taskId: null });
+  const [showAdminDashboard, setShowAdminDashboard] = useState(false);
 
   const { logout, isAdmin } = useAuth();
 
-  // Admin dashboard view
-  const [showAdminDashboard, setShowAdminDashboard] = useState(false);
-
-  if (showAdminDashboard) {
-    return <AdminDashboard onBack={() => setShowAdminDashboard(false)} />;
-  }
-
-  // Dark mode effect
   useEffect(() => {
     if (darkMode) {
       document.documentElement.classList.add('dark');
@@ -56,9 +45,7 @@ function ProtectedApp() {
     localStorage.setItem('taskflow-dark-mode', String(darkMode));
   }, [darkMode]);
 
-  const toggleTheme = useCallback(() => {
-    setDarkMode((prev) => !prev);
-  }, []);
+  const toggleTheme = useCallback(() => setDarkMode((prev) => !prev), []);
 
   const loadData = useCallback(async () => {
     const [tasksData, categoriesData, prioritiesData, statsData] =
@@ -88,9 +75,7 @@ function ProtectedApp() {
     setShowFormModal(true);
   };
 
-  const handleTaskClick = (task: Task) => {
-    setSelectedTask(task);
-  };
+  const handleTaskClick = (task: Task) => setSelectedTask(task);
 
   const handleStatusChange = async (taskId: number, newStatus: string) => {
     await api.updateStatus(taskId, newStatus);
@@ -124,6 +109,10 @@ function ProtectedApp() {
     setEditingTask(null);
     await loadData();
   };
+
+  if (showAdminDashboard) {
+    return <AdminDashboard onBack={() => setShowAdminDashboard(false)} />;
+  }
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-50 via-white to-indigo-50/30 dark:from-slate-950 dark:via-slate-900 dark:to-slate-950">
@@ -171,9 +160,7 @@ function ProtectedApp() {
             handleEditTask(selectedTask);
           }}
           onDelete={() => handleDeleteRequest(selectedTask.id)}
-          onStatusChange={(status) =>
-            handleStatusChange(selectedTask.id, status)
-          }
+          onStatusChange={(status) => handleStatusChange(selectedTask.id, status)}
           onRefresh={loadData}
           isAdmin={isAdmin}
         />
