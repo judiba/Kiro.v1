@@ -7,6 +7,7 @@ import { TaskFormModal } from './components/TaskFormModal';
 import { TaskDetailModal } from './components/TaskDetailModal';
 import { ConfirmDialog } from './components/ConfirmDialog';
 import { Login } from './components/Login';
+import { AdminDashboard } from './components/AdminDashboard';
 import { useAuth } from './auth';
 
 function ProtectedApp() {
@@ -37,6 +38,13 @@ function ProtectedApp() {
   });
 
   const { logout, isAdmin } = useAuth();
+
+  // Admin dashboard view
+  const [showAdminDashboard, setShowAdminDashboard] = useState(false);
+
+  if (showAdminDashboard) {
+    return <AdminDashboard onBack={() => setShowAdminDashboard(false)} />;
+  }
 
   // Dark mode effect
   useEffect(() => {
@@ -125,6 +133,8 @@ function ProtectedApp() {
         darkMode={darkMode}
         onToggleTheme={toggleTheme}
         logout={logout}
+        isAdmin={isAdmin}
+        onAdminDashboard={() => setShowAdminDashboard(true)}
       />
       <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         <KanbanBoard

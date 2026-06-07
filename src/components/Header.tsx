@@ -8,6 +8,7 @@ import {
   Sun,
   User,
   SignOut,
+  ShieldStar,
 } from '@phosphor-icons/react';
 import type { Stats } from '../types';
 
@@ -17,6 +18,8 @@ interface HeaderProps {
   darkMode: boolean;
   onToggleTheme: () => void;
   logout: () => void;
+  isAdmin: boolean;
+  onAdminDashboard: () => void;
 }
 
 export function Header({
@@ -25,6 +28,8 @@ export function Header({
   darkMode,
   onToggleTheme,
   logout,
+  isAdmin,
+  onAdminDashboard,
 }: HeaderProps) {
   const user = JSON.parse(localStorage.getItem('taskflow-user') || '{}');
 
@@ -113,6 +118,17 @@ export function Header({
                 <Moon size={20} weight="bold" />
               )}
             </button>
+
+            {isAdmin && (
+              <button
+                onClick={onAdminDashboard}
+                className="p-2 rounded-lg text-red-500 hover:bg-red-50 dark:hover:bg-red-900/20 transition-colors duration-150"
+                title="Dashboard Admin"
+                aria-label="Abrir dashboard de administração"
+              >
+                <ShieldStar size={20} weight="bold" />
+              </button>
+            )}
 
             <button
               onClick={logout}

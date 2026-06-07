@@ -20,6 +20,31 @@ Aplicativo web moderno de gestão de tarefas estilo Kanban, construído 100% no 
 - **Modal de detalhes** com descrição completa, metadados, ações e seção de notas/comentários
 - **Diálogo de confirmação** antes de qualquer exclusão
 - **Ícones Phosphor** para uma interface limpa e moderna
+- **Dashboard Admin** para criação e gerenciamento de usuários (somente role `admin`)
+
+---
+
+## Dashboard Admin
+
+Acessível exclusivamente por usuários com role `admin` via ícone 🛡️ no header.
+
+### Funcionalidades
+
+- **Cards de resumo** — total de usuários, quantidade de editors e viewers
+- **Tabela de usuários** — avatar, username, email, role badge colorido, data de criação e último login
+- **Criar usuário** — modal com validação inline (username, email, senha, confirmação de senha e role)
+- **Excluir usuário** — com diálogo de confirmação; a exclusão de admins é bloqueada na UI
+- **Roles disponíveis para criação**: `editor` e `viewer` (admins são criados diretamente no banco)
+
+### Regras de acesso
+
+| Role    | Acesso ao dashboard |
+| ------- | ------------------- |
+| admin   | ✅ Completo          |
+| editor  | ❌ Negado            |
+| viewer  | ❌ Negado            |
+
+Todas as rotas `/api/users` exigem token JWT com role `admin`. Tentativas de acesso com outra role retornam `403 Forbidden`.
 
 ---
 
@@ -105,6 +130,7 @@ Sem dependências externas de banco de dados — tudo roda com o SQLite embutido
 │   │   ├── TaskCard.tsx           # Card individual com drag, ações e badges
 │   │   ├── TaskFormModal.tsx      # Modal de criação/edição de tarefa
 │   │   ├── TaskDetailModal.tsx    # Modal de detalhes + comentários
+│   │   ├── AdminDashboard.tsx     # Dashboard admin: listagem e criação de usuários
 │   │   ├── ConfirmDialog.tsx      # Dialog de confirmação de exclusão
 │   │   ├── Header.tsx             # Header com stats, user info e ações
 │   │   ├── Login.tsx              # Tela de login
@@ -184,6 +210,7 @@ O projeto utiliza o test runner nativo do Bun com `fast-check` para testes basea
 | GET    | `/api/stats`                 | Estatísticas (contadores por status) |
 | GET    | `/api/users`                 | Listar usuários (admin)              |
 | GET    | `/api/users/:id`             | Obter usuário por ID (admin)         |
+| POST   | `/api/users`                 | Criar novo usuário (admin)           |
 | PUT    | `/api/users/:id`             | Atualizar usuário (admin)            |
 | DELETE | `/api/users/:id`             | Excluir usuário (admin)              |
 
