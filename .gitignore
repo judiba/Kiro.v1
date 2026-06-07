@@ -1,2 +1,21 @@
-/.vscode
-node_modules
+# Dependências
+node_modules/
+
+# Build output (gerado por bun run build.ts)
+public/assets/
+
+# Banco de dados SQLite (gerado em runtime)
+tasks.db
+tasks.db-shm
+tasks.db-wal
+
+# Logs e outputs temporários
+build_out.txt
+build_err.txt
+server_output.txt
+
+# Scripts de ambiente local
+start.ps1
+
+# Editor
+.vscode/
