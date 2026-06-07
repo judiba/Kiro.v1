@@ -1,0 +1,9 @@
+node_modules
+public/assets
+bun.lock
+tasks.db
+tasks.db-shm
+tasks.db-wal
+build_out.txt
+build_err.txt
+server_output.txt

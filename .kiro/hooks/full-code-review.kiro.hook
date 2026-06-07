@@ -1,0 +1,13 @@
+{
+  "enabled": true,
+  "name": "Full Code Review",
+  "description": "Realiza uma revisão de código completa do aplicativo To-Do, verificando qualidade de código, problemas de segurança e padrões de acessibilidade.",
+  "version": "1",
+  "when": {
+    "type": "userTriggered"
+  },
+  "then": {
+    "type": "askAgent",
+    "prompt": "Realize uma revisão de código completa do aplicativo To-Do. Leia os arquivos principais do projeto (server/, src/components/, src/hooks/, src/api.ts, src/App.tsx, src/auth.tsx) e avalie os seguintes aspectos:\n\n1. **Qualidade de Código**: Identifique código duplicado, funções muito longas, falta de tratamento de erros, tipagem inadequada, nomes de variáveis pouco claros, e violações de princípios SOLID.\n\n2. **Segurança**: Verifique vulnerabilidades como SQL injection, XSS, CSRF, credenciais hardcoded, falta de validação de input, headers de segurança ausentes, exposição de dados sensíveis em logs ou respostas, e autenticação/autorização inadequada.\n\n3. **Acessibilidade (WCAG)**: Verifique uso correto de roles ARIA, labels em elementos interativos, contraste de cores, navegação por teclado, focus management, alt text em imagens, estrutura semântica de headings, e live regions para conteúdo dinâmico.\n\nPara cada problema encontrado, indique: o arquivo e linha aproximada, a severidade (alta/média/baixa), a categoria (qualidade/segurança/acessibilidade), e uma sugestão de correção. Apresente um resumo final com a contagem de problemas por categoria e severidade."
+  }
+}

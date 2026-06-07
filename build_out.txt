@@ -1,0 +1,4 @@
+🔨 Iniciando build...
+✅ JS compilado com sucesso
+✅ CSS compilado com sucesso
+🎉 Build concluído!

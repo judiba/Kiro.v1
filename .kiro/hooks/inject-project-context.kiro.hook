@@ -1,0 +1,13 @@
+{
+  "enabled": true,
+  "name": "Inject Project Context",
+  "description": "Injects project technology stack and conventions context on every prompt submission.",
+  "version": "1",
+  "when": {
+    "type": "promptSubmit"
+  },
+  "then": {
+    "type": "runCommand",
+    "command": "echo \"Contexto do Projeto: App To-Do | Frontend: React+Tailwind+TypeScript | Backend: ElysiaJS+SQLite | Runtime: Bun | Padrões: Prettier | Sempre use TypeScript strict mode\""
+  }
+}

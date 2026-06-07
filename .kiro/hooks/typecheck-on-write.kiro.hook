@@ -1,0 +1,16 @@
+{
+  "enabled": true,
+  "name": "TypeCheck on Write",
+  "description": "Runs TypeScript type-check (bunx tsc --noEmit) after any file write to ensure no type errors were introduced.",
+  "version": "1",
+  "when": {
+    "type": "postToolUse",
+    "toolTypes": [
+      "write"
+    ]
+  },
+  "then": {
+    "type": "runCommand",
+    "command": "bunx tsc --noEmit"
+  }
+}

@@ -1,0 +1,13 @@
+{
+  "enabled": true,
+  "name": "Format on Agent Stop",
+  "description": "Runs Prettier to format code automatically when the agent finishes generating code.",
+  "version": "1",
+  "when": {
+    "type": "agentStop"
+  },
+  "then": {
+    "type": "runCommand",
+    "command": "bunx prettier --write ."
+  }
+}

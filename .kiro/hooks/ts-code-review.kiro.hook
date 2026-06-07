@@ -1,0 +1,17 @@
+{
+  "enabled": true,
+  "name": "TypeScript Code Review",
+  "description": "Ao salvar arquivos .ts ou .tsx, verifica padrões de código, tratamento de erros e sugere melhorias.",
+  "version": "1",
+  "when": {
+    "type": "fileEdited",
+    "patterns": [
+      "*.ts",
+      "*.tsx"
+    ]
+  },
+  "then": {
+    "type": "askAgent",
+    "prompt": "Revise o arquivo editado e verifique: 1) Padrões de código (nomenclatura, organização, consistência de estilo). 2) Tratamento adequado de erros (try/catch, validação de inputs, handling de promises). 3) Possíveis melhorias (tipagem mais precisa, simplificação de lógica, remoção de código desnecessário). Seja conciso e objetivo nas sugestões, focando apenas em problemas reais e melhorias significativas. Não sugira mudanças triviais ou cosméticas."
+  }
+}
